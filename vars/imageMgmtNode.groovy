@@ -1,3 +1,4 @@
+// vars/imageMgmtNode.groovy
 def call(String name, Closure body) {
     // we ned credentials for skopeo (copy images from openshift to artifactory) and for the artifactory promotion.
     withCredentials([usernameColonPassword(credentialsId: 'artifactory', variable: 'SKOPEO_DEST_CREDENTIALS')]) {

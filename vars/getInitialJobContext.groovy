@@ -1,3 +1,4 @@
+// vars/getInitialJobContext.groovy
 def call(boolean withVersion = true) {
     def jobContext = [:]
 
