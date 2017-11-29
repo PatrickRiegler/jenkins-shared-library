@@ -58,7 +58,8 @@ node() {
     }
 
     runTestsFor('imageMgmtNode') {
-        imageMgmtNode("function-tests") {
+        def nodeName = "function-tests"
+        imageMgmtNode(nodeName) {
             def skopeoCopyExists = sh returnStatus: true, script: 'which skopeoCopy.sh'
 
             assert skopeoCopyExists == 0: "skopeoCopy.sh should exist if we are running in the imageMgmtNode"
@@ -66,6 +67,9 @@ node() {
             def promoteToArtifactoryExists = sh returnStatus: true, script: 'which promoteToArtifactory.sh'
 
             assert promoteToArtifactoryExists == 0: "promoteToArtifactory.sh should exist if we are running in the imageMgmtNode"
+
+            // the pod name is stored in $HOSTNAME env variable
+            assert env.HOSTNAME.startsWith(nodeName) : "The slave pod's name should start with ${nodeName}"
         }
     }
 
